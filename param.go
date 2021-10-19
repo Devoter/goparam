@@ -1,4 +1,4 @@
-package param
+package goparam
 
 import (
 	"flag"
