@@ -1,4 +1,4 @@
-# param
+# goparam
 
 Param is a wrapper of the standard `flag` package which adds a support of environment variables.
 
