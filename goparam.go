@@ -13,11 +13,14 @@ import (
 // The return value is the address of a bool variable that stores the value of the flag or the enviroment variable.
 func Bool(envName string, paramName string, defaultValue bool, description string) *bool {
 	param := defaultValue
-	envVar, isSet := os.LookupEnv(envName)
-	if isSet {
-		val, err := strconv.ParseBool(envVar)
-		exit(envName, "bool", err)
-		param = val
+
+	if envName != "" {
+		envVar, isSet := os.LookupEnv(envName)
+		if isSet {
+			val, err := strconv.ParseBool(envVar)
+			exit(envName, "bool", err)
+			param = val
+		}
 	}
 
 	return flag.Bool(paramName, param, description)
@@ -28,11 +31,14 @@ func Bool(envName string, paramName string, defaultValue bool, description strin
 // The return value is the address of a time.Durarion variable that stores the value of the flag or the enviroment variable.
 func Duration(envName string, paramName string, defaultValue time.Duration, description string) *time.Duration {
 	param := defaultValue
-	envVar, isSet := os.LookupEnv(envName)
-	if isSet {
-		val, err := strconv.ParseInt(envVar, 10, 64)
-		exit(envName, "time.Duration", err)
-		param = time.Duration(val)
+
+	if envName != "" {
+		envVar, isSet := os.LookupEnv(envName)
+		if isSet {
+			val, err := strconv.ParseInt(envVar, 10, 64)
+			exit(envName, "time.Duration", err)
+			param = time.Duration(val)
+		}
 	}
 
 	return flag.Duration(paramName, param, description)
@@ -42,11 +48,14 @@ func Duration(envName string, paramName string, defaultValue time.Duration, desc
 // The return value is the address of an int variable that stores the value of the flag or the enviroment variable.
 func Int(envName string, paramName string, defaultValue int, description string) *int {
 	param := defaultValue
-	envVar, isSet := os.LookupEnv(envName)
-	if isSet {
-		val, err := strconv.Atoi(envVar)
-		exit(envName, "int", err)
-		param = val
+
+	if envName != "" {
+		envVar, isSet := os.LookupEnv(envName)
+		if isSet {
+			val, err := strconv.Atoi(envVar)
+			exit(envName, "int", err)
+			param = val
+		}
 	}
 
 	return flag.Int(paramName, param, description)
@@ -56,11 +65,14 @@ func Int(envName string, paramName string, defaultValue int, description string)
 // The return value is the address of an int64 variable that stores the value of the flag or the enviroment variable.
 func Int64(envName string, paramName string, defaultValue int64, description string) *int64 {
 	param := defaultValue
-	envVar, isSet := os.LookupEnv(envName)
-	if isSet {
-		val, err := strconv.ParseInt(envVar, 10, 64)
-		exit(envName, "int64", err)
-		param = val
+
+	if envName != "" {
+		envVar, isSet := os.LookupEnv(envName)
+		if isSet {
+			val, err := strconv.ParseInt(envVar, 10, 64)
+			exit(envName, "int64", err)
+			param = val
+		}
 	}
 
 	return flag.Int64(paramName, param, description)
@@ -70,11 +82,14 @@ func Int64(envName string, paramName string, defaultValue int64, description str
 // The return value is the address of a uint variable that stores the value of the flag or the enviroment variable.
 func Uint(envName string, paramName string, defaultValue uint, description string) *uint {
 	param := defaultValue
-	envVar, isSet := os.LookupEnv(envName)
-	if isSet {
-		val, err := strconv.ParseUint(envVar, 10, bits.UintSize)
-		exit(envName, "uint", err)
-		param = uint(val)
+
+	if envName != "" {
+		envVar, isSet := os.LookupEnv(envName)
+		if isSet {
+			val, err := strconv.ParseUint(envVar, 10, bits.UintSize)
+			exit(envName, "uint", err)
+			param = uint(val)
+		}
 	}
 
 	return flag.Uint(paramName, param, description)
@@ -84,11 +99,14 @@ func Uint(envName string, paramName string, defaultValue uint, description strin
 // The return value is the address of a uint64 variable that stores the value of the flag or the enviroment variable.
 func Uint64(envName string, paramName string, defaultValue uint64, description string) *uint64 {
 	param := defaultValue
-	envVar, isSet := os.LookupEnv(envName)
-	if isSet {
-		val, err := strconv.ParseUint(envVar, 10, 64)
-		exit(envName, "uint64", err)
-		param = val
+
+	if envName != "" {
+		envVar, isSet := os.LookupEnv(envName)
+		if isSet {
+			val, err := strconv.ParseUint(envVar, 10, 64)
+			exit(envName, "uint64", err)
+			param = val
+		}
 	}
 
 	return flag.Uint64(paramName, param, description)
@@ -98,11 +116,14 @@ func Uint64(envName string, paramName string, defaultValue uint64, description s
 // The return value is the address of a float64 variable that stores the value of the flag or the enviroment variable.
 func Float64(envName string, paramName string, defaultValue float64, description string) *float64 {
 	param := defaultValue
-	envVar, isSet := os.LookupEnv(envName)
-	if isSet {
-		val, err := strconv.ParseFloat(envVar, 10)
-		exit(envName, "float64", err)
-		param = val
+
+	if envName != "" {
+		envVar, isSet := os.LookupEnv(envName)
+		if isSet {
+			val, err := strconv.ParseFloat(envVar, 10)
+			exit(envName, "float64", err)
+			param = val
+		}
 	}
 
 	return flag.Float64(paramName, param, description)
@@ -113,9 +134,12 @@ func Float64(envName string, paramName string, defaultValue float64, description
 // ATTENSION: Be careful, empty string is valid.
 func String(envName string, paramName string, defaultValue string, desctiption string) *string {
 	param := defaultValue
-	envVar, isSet := os.LookupEnv(envName)
-	if isSet {
-		param = envVar
+
+	if envName != "" {
+		envVar, isSet := os.LookupEnv(envName)
+		if isSet {
+			param = envVar
+		}
 	}
 
 	return flag.String(paramName, param, desctiption)
